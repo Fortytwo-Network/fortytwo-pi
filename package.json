@@ -1,0 +1,46 @@
+{
+  "name": "fortytwo-pi",
+  "version": "0.1.0",
+  "description": "Fortytwo Engine provider for Pi coding agent",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "fortytwo",
+    "provider"
+  ],
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./src/index.ts"
+    ]
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "check": "npm run typecheck && npm test",
+    "test:live": "node --experimental-strip-types scripts/live-check.ts",
+    "prepack": "npm run check",
+    "test:agent": "node --experimental-strip-types scripts/agent-check.ts"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "1.4.0",
+    "@earendil-works/pi-ai": "1.4.0",
+    "@types/node": "22.20.5",
+    "typescript": "7.0.2"
+  },
+  "overrides": {
+    "undici": "8.12.2"
+  }
+}

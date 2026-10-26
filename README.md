@@ -14,7 +14,7 @@ pi install npm:fortytwo-pi
 
 ## Usage
 
-Set your [Fortytwo API](https://platform.fortytwo.network/api-keys) key and start Pi in your project:
+Set your [Fortytwo API key](https://platform.fortytwo.network/api-keys) and start Pi in your project:
 
 ```sh
 export FORTYTWO_API_KEY="your-api-key"

@@ -4,6 +4,15 @@
   "description": "Fortytwo Engine provider for Pi coding agent",
   "type": "module",
   "license": "MIT",
+  "author": "Fortytwo",
+  "homepage": "https://github.com/Fortytwo-Network/fortytwo-pi#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fortytwo-Network/fortytwo-pi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fortytwo-Network/fortytwo-pi/issues"
+  },
   "keywords": [
     "pi-package",
     "pi",
@@ -21,7 +30,7 @@
     ]
   },
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=22.19.0"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

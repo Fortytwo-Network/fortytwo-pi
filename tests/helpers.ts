@@ -2,7 +2,7 @@ import { createProviderConfig, PROVIDER_ID } from "../src/provider.ts";
 import type { Model } from "@earendil-works/pi-ai";
 
 export function model(): Model<"openai-completions"> {
-  const config = createProviderConfig();
+  const config = createProviderConfig({});
   return { ...config.models[0]!, api: config.api, baseUrl: config.baseUrl, provider: PROVIDER_ID };
 }
 export function sse(deltas: object[], finish = "stop", usage?: object): Response {

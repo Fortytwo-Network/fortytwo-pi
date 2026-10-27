@@ -3,6 +3,7 @@ import test from "node:test";
 import { streamSimple } from "@earendil-works/pi-ai/api/openai-completions";
 import { normalizeContext } from "@earendil-works/pi-ai/utils/transcript";
 import { model, sse, record } from "./helpers.ts";
+import { createProviderConfig, DEFAULT_BASE_URL } from "../src/provider.ts";
 
 const context = () => normalizeContext({ messages: [{ role: "user", content: "Synthetic request", timestamp: 0 }] });
 
@@ -120,4 +121,21 @@ test("connection failure is surfaced rather than an empty success",async()=>{
   fetch:async()=>{throw new TypeError("synthetic connection failure");},
  }).result();
  assert.equal(result.stopReason,"error");assert.ok(result.errorMessage);
+});
+
+test("base URL defaults to production and can be overridden for staging", () => {
+ assert.equal(createProviderConfig({}).baseUrl, DEFAULT_BASE_URL);
+ assert.equal(createProviderConfig({FORTYTWO_BASE_URL:"https://staging.example/v1"}).baseUrl, "https://staging.example/v1");
+});
+
+test("requests carry no store or long prompt-cache fields, even with long retention", async () => {
+ let sent = false;
+ await streamSimple(model(), context(), {apiKey:"synthetic-test-key", sessionId:"synthetic-session", cacheRetention:"long", fetch:async(input,init)=>{
+  const payload = record(await new Request(input,init).json());
+  assert.equal("store" in payload, false);
+  assert.equal("prompt_cache_retention" in payload, false);
+  assert.equal("prompt_cache_key" in payload, false);
+  sent = true; return sse([{content:"ok"}]);
+ }}).result();
+ assert.ok(sent);
 });

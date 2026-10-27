@@ -106,7 +106,7 @@ Live checks call the production API and need a key:
 ```sh
 export FORTYTWO_API_KEY="your-api-key"
 npm run test:live    # streaming, long context, reasoning, image input
-npm run test:agent   # installs the package into a temporary Pi, runs a multi-step tool task with reasoning off and medium
+npm run test:agent   # installs the package into a temporary Pi: multi-step tool task with reasoning off and medium, and a session that triggers context compaction
 ```
 
 ## License
